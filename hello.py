@@ -16,5 +16,10 @@ def on_draw():
     label.draw()
 
 
+@window.event
+def on_key_press(symbol, modifiers):
+    label.text = pyglet.window.key.symbol_string(symbol)
+
+
 if __name__ == '__main__':
     pyglet.app.run()
