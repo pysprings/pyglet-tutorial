@@ -65,11 +65,12 @@ def show_results(dt):
     update_countdown(None, score(player_move, computer_move))
 
 
-pyglet.clock.schedule_once(update_countdown, 1, text='3')
-pyglet.clock.schedule_once(update_countdown, 2, text='2')
-pyglet.clock.schedule_once(update_countdown, 3, text='1')
-pyglet.clock.schedule_once(run_round, 4)
-pyglet.clock.schedule_once(show_results, 4.5)
+def schedule():
+    pyglet.clock.schedule_once(update_countdown, 1, text='3')
+    pyglet.clock.schedule_once(update_countdown, 2, text='2')
+    pyglet.clock.schedule_once(update_countdown, 3, text='1')
+    pyglet.clock.schedule_once(run_round, 4)
+    pyglet.clock.schedule_once(show_results, 4.5)
 
 
 @window.event
@@ -94,4 +95,5 @@ def on_key_press(symbol, modifiers):
 
 
 if __name__ == '__main__':
+    schedule()
     pyglet.app.run()
