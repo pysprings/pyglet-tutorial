@@ -1,6 +1,14 @@
 import random
 import pyglet
 
+
+beats = {
+        'rock': ['scissors'],
+        'scissors': ['paper'],
+        'paper': ['rock']
+}
+
+
 window = pyglet.window.Window()
 countdown = pyglet.text.Label(
             '',
@@ -45,6 +53,10 @@ def run_round(dt):
 def score(player_move, computer_move):
     if player_move == computer_move:
         return 'Tie'
+    elif player_move in beats[computer_move]:
+        return 'Lose'
+    else:
+        return 'Win!'
 
 
 def show_results(dt):
