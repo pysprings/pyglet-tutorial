@@ -8,11 +8,13 @@ label = pyglet.text.Label(
             x=window.width//2, y=window.height//2,
             anchor_x='center', anchor_y='center'
         )
+image = pyglet.resource.image('rock.png')
 
 
 @window.event
 def on_draw():
     window.clear()
+    image.blit(window.width//2, window.height * .60)
     label.draw()
 
 
