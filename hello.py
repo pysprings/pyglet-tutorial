@@ -8,6 +8,13 @@ label = pyglet.text.Label(
             x=window.width//2, y=window.height//2,
             anchor_x='center', anchor_y='center'
         )
+label1 = pyglet.text.Label(
+            '',
+            font_name='Times New Roman',
+            font_size=36,
+            x=window.width//2, y=window.height * .4,
+            anchor_x='center', anchor_y='center'
+        )
 image = pyglet.resource.image('rock.png')
 image.anchor_x = image.width // 2
 image.anchor_y = image.height // 2
@@ -32,11 +39,19 @@ def on_draw():
     for image, x, y in images:
         image.blit(x, y)
     label.draw()
+    label1.draw()
+
+
+key_actions = {
+    pyglet.window.key.R: 'rock',
+    pyglet.window.key.P: 'paper',
+    pyglet.window.key.S: 'scissors'
+}
 
 
 @window.event
 def on_key_press(symbol, modifiers):
-    label.text = pyglet.window.key.symbol_string(symbol)
+    label1.text = key_actions.get(symbol, '')
 
 
 if __name__ == '__main__':
