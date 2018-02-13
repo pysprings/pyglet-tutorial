@@ -1,18 +1,18 @@
 import pyglet
 
 window = pyglet.window.Window()
-label = pyglet.text.Label(
+countdown = pyglet.text.Label(
             '',
             font_name='Times New Roman',
             font_size=36,
             x=window.width//2, y=window.height//2,
             anchor_x='center', anchor_y='center'
         )
-label1 = pyglet.text.Label(
+user_selection = pyglet.text.Label(
             '',
             font_name='Times New Roman',
             font_size=36,
-            x=window.width//2, y=window.height * .4,
+            x=window.width//2, y=window.height * .1,
             anchor_x='center', anchor_y='center'
         )
 image = pyglet.resource.image('rock.png')
@@ -22,14 +22,18 @@ image.anchor_y = image.height // 2
 images = []
 
 
-def update_label(dt, text):
-    label.text = text
+def update_countdown(dt, text):
+    countdown.text = text
 
 
-pyglet.clock.schedule_once(update_label, 1, text='3')
-pyglet.clock.schedule_once(update_label, 2, text='2')
-pyglet.clock.schedule_once(update_label, 3, text='1')
-pyglet.clock.schedule_once(update_label, 4, text='Go!')
+def run_round(dt):
+    update_countdown(None, 'Go!')
+
+
+pyglet.clock.schedule_once(update_countdown, 1, text='3')
+pyglet.clock.schedule_once(update_countdown, 2, text='2')
+pyglet.clock.schedule_once(update_countdown, 3, text='1')
+pyglet.clock.schedule_once(run_round, 4)
 pyglet.clock.schedule_once(lambda dt: images.append((image, window.width//2, window.height * .75)), 4.5)
 
 
@@ -38,8 +42,8 @@ def on_draw():
     window.clear()
     for image, x, y in images:
         image.blit(x, y)
-    label.draw()
-    label1.draw()
+    countdown.draw()
+    user_selection.draw()
 
 
 key_actions = {
@@ -51,7 +55,7 @@ key_actions = {
 
 @window.event
 def on_key_press(symbol, modifiers):
-    label1.text = key_actions.get(symbol, '')
+    user_selection.text = key_actions.get(symbol, '')
 
 
 if __name__ == '__main__':
